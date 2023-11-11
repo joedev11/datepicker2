@@ -1,0 +1,30 @@
+.days-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.days {
+    text-align: center;
+    font-size: 13px;
+    padding: 2px;
+    margin: 4px auto;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    line-height: 22px;
+
+}
+
+.inactive {
+    color: #eeeeee;
+}
+
+.red {
+    background-color: #F34242;
+    color: white;
+}
+
+.today {
+    color: #F34242;
+}

@@ -1,0 +1,19 @@
+.datepicker-container {
+    height: 267px;
+    width: 198px;
+    padding: 10px;
+    margin: 0 10px;
+    border: 1px solid black;
+}
+
+.input-date {
+    width: 120px;
+    margin: 10px 0 5px 10px;
+    padding: 7px 0 7px 28px;
+}
+
+.calendar-icon {
+    position: absolute;
+    top: 15px;
+    left: 16px;
+}
