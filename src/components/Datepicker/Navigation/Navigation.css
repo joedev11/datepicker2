@@ -10,9 +10,11 @@
     font-size: 16px;
     font-stretch: condensed;
     font-weight: 600;
+    font-family: 'Roboto', sans-serif;
 }
 
 .current-month {
+    font-family: 'Roboto', sans-serif;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -21,7 +23,7 @@
     height: 27px;
     border-radius: 3px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.5px;
 }
 
@@ -34,13 +36,13 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
-    margin: auto;
+    margin: 0 auto 6px;
     text-align: center;
     padding: 0;
 }
 
 .days-label li {
     margin: 0 2px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 700;
 }

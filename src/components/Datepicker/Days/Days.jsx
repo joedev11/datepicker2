@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './days.css';
 
-const Days = ({ date, onChangeDate }) => {
+const Days = ({ date, onChangeDate, onCloseCalendar }) => {
   console.log('days: ' + date)
-  const [selectedDate, setSelectedDate] = useState(date);
 
   const handleDateClick = (day) => {
-    const currentYear = selectedDate.getFullYear();
-    const currentMonth = selectedDate.getMonth();
+    const currentYear = date.getFullYear();
+    const currentMonth = date.getMonth();
     const newDate = new Date(currentYear, currentMonth, day);
   
-    console.log('Days' + newDate);
     onChangeDate(newDate);
-    setSelectedDate(newDate);
-  };  
+    onCloseCalendar();
+  };
 
   const formatDate = (date) => {
-    // console.log('formatDate: ' + date)
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
@@ -49,21 +46,32 @@ const Days = ({ date, onChangeDate }) => {
       const day = i.toString();
       const today = new Date();
       const newDate = new Date(currentYear, currentMonth, i); // Create a new Date for comparison
-      const isSelected = formatDate(selectedDate) === formatDate(newDate); // Use the same formatting function
+      const isSelected = formatDate(date) === formatDate(newDate); // Use the same formatting function
       const isToday = today.getDate() === i && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+      let color = 'black';
+      let backgroundColor = 'transparent';
+
+      if(isToday) {
+        color = '#F34242';
+      }
+
+      if(isSelected) {
+        color = 'white'
+        backgroundColor = '#F34242'
+      } 
 
       daysArr.push(
         <span
           key={day}
           onClick={() => handleDateClick(i)}
-          className={`days ${isSelected ? 'red' : ''} ${isToday ? 'today' : ''}`}
+          className={`days`}
+          style={{color, backgroundColor}}
         >
           {day}
         </span>
       );
     }
     
-
     // Populate the days from the next month
     for (let i = 0; i < daysAfter; i++) {
       daysArr.push(
@@ -76,7 +84,20 @@ const Days = ({ date, onChangeDate }) => {
     return daysArr;
   };
 
-  return <div className="days-container">{populateDaysInSelectedMonth()}</div>;
+  return (
+    <div>
+      <ul className="days-label">
+        <li>Su</li>
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+      </ul>
+      <div className="days-container">{populateDaysInSelectedMonth()}</div>
+    </div>
+  );
 };
 
 export default Days;
