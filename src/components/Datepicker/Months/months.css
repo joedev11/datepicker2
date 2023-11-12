@@ -21,6 +21,7 @@
     line-height: 50px;
 }
 
+/* Media query for mobile */
 @media (max-width: 480px) {
     .months-container li {
         font-size: 16px;
