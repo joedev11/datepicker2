@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './Navigation.css';
 
+/**
+ * Navigation component for switching between views (days, months, years) and navigating through time.
+ * 
+ * @param {Date} date - The current date in the navigation.
+ * @param {string} view - The current view ('days', 'months', 'years').
+ * @param {function} onChangeView - Callback function to change the current view.
+ * @param {function} onChangeMonth - Callback function to change the current month.
+ */
 const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
   const [currentDate, setCurrentDate] = useState(date);
   const [currentView, setView] = useState(view);
 
+  // useEffect to log updates and synchronize state with props
   useEffect(() => {
     console.log('Updated Navigation view:', view);
     console.log('Updated Navigation date:', date);
@@ -12,9 +21,12 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
     setCurrentDate(date);
   }, [view, date, currentDate]);
 
-
+  /**
+   * Formats the current date based on the current view.
+   * 
+   * @returns {string} - The formatted date string.
+   */
   const formatCurrentDate = () => {
-    console.log('Date from days to Navigation: ' + date)
     let month = date.getMonth();
     let year = date.getFullYear();
     let day = date.getDate();
@@ -37,6 +49,9 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
     }
   };
 
+  /**
+   * Handles the click event to navigate to the next month or year based on the current view.
+   */
   const nextMonth = () => {
     let newMonth = currentDate.getMonth();
     let year = currentDate.getFullYear();
@@ -55,8 +70,8 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
         setCurrentDate(newDate);
         break;
       case 'years':
-        year += 10; // Increment by 10 years for the "years" view
-        newDate = new Date(year, 0, 1); // Set to the first month of the new year
+        year += 10;
+        newDate = new Date(year, 0, 1);
         onChangeMonth(newDate);
         setCurrentDate(newDate);
         break;
@@ -65,6 +80,9 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
     }
   };
 
+  /**
+   * Handles the click event to navigate to the previous month or year based on the current view.
+   */
   const prevMonth = () => {
     let newMonth = currentDate.getMonth();
     let year = currentDate.getFullYear();
@@ -84,8 +102,8 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
         setCurrentDate(newDate);
         break;
       case 'years':
-        year -= 10; // Decrement by 10 years for the "years" view
-        newDate = new Date(year, 0, 1); // Set to the first month of the new year
+        year -= 10;
+        newDate = new Date(year, 0, 1);
         onChangeMonth(newDate);
         setCurrentDate(newDate);
         break;
@@ -94,6 +112,9 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
     }
   };
 
+  /**
+   * Handles the click event to change the current view.
+   */
   const handleChangeView = () => {
     if (view === 'days') {
       setView('months');

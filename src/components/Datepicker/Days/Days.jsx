@@ -1,19 +1,35 @@
 import React from 'react';
 import './days.css';
 
+/**
+ * Days component for displaying and selecting days within a month.
+ * 
+ * @param {Date} date - The current selected date.
+ * @param {function} onChangeDate - Callback function to change the selected date.
+ * @param {function} onCloseCalendar - Callback function to close the calendar.
+ */
 const Days = ({ date, onChangeDate, onCloseCalendar }) => {
-  console.log('Date to Days: ' + date)
 
+  /**
+   * Handles the click event for a specific day, updating the selected date.
+   * 
+   * @param {number} day - The selected day.
+   */
   const handleDateClick = (day) => {
     const currentYear = date.getFullYear();
     const currentMonth = date.getMonth();
     const newDate = new Date(currentYear, currentMonth, day);
     
-    console.log('Date from Days: ' + newDate);
     onChangeDate(newDate);
     onCloseCalendar();
   };
 
+  /**
+   * Formats a given date into a string with the format 'YYYY-MM-DD'.
+   * 
+   * @param {Date} date - The date to be formatted.
+   * @returns {string} - A string representing the formatted date.
+   */
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -21,6 +37,11 @@ const Days = ({ date, onChangeDate, onCloseCalendar }) => {
     return `${year}-${month}-${day}`;
   };
 
+  /**
+   * Populates the days in the selected month, including days from the previous and next months.
+   * 
+   * @returns {JSX.Element[]} - An array of JSX elements representing the days.
+   */
   const populateDaysInSelectedMonth = () => {
     const currentMonth = date.getMonth();
     const currentYear = date.getFullYear();
@@ -46,8 +67,8 @@ const Days = ({ date, onChangeDate, onCloseCalendar }) => {
     for (let i = 1; i <= daysInCurrentMonth; i++) {
       const day = i.toString();
       const today = new Date();
-      const newDate = new Date(currentYear, currentMonth, i); // Create a new Date for comparison
-      const isSelected = formatDate(date) === formatDate(newDate); // Use the same formatting function
+      const newDate = new Date(currentYear, currentMonth, i);
+      const isSelected = formatDate(date) === formatDate(newDate);
       const isToday = today.getDate() === i && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
       let color = 'black';
       let backgroundColor = 'transparent';
@@ -81,7 +102,6 @@ const Days = ({ date, onChangeDate, onCloseCalendar }) => {
         </div>
       );
     }
-
     return daysArr;
   };
 

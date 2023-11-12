@@ -5,12 +5,23 @@ import Days from './Days/Days';
 import Months from './Months/Months';
 import Years from './Years/Years';
 
+/**
+ * Datepicker component that allows users to select a date.
+ * 
+ * @param {Date} date - The initial date for the Datepicker. Defaults to the current date if not provided.
+ */
 const Datepicker = ({ date = new Date() }) => {
   const [view, setView] = useState('days');
   const [currentDate, setCurrentDate] = useState(date);
   const [inputValue, setInputValue] = useState(formatDate(date));
   const [showCalendar, setShowCalendar] = useState(false);
 
+  /**
+   * Formats a given date into a string with the format 'YYYY-MM-DD'.
+   * 
+   * @param {Date} date - The date to be formatted.
+   * @returns {string} - A string representing the formatted date.
+   */
   function formatDate(date) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -18,21 +29,37 @@ const Datepicker = ({ date = new Date() }) => {
     return `${year}-${month}-${day}`;
   }
 
+  /**
+   * Handles the change of the selected date in the Datepicker.
+   * 
+   * @param {Date} newDate - The new selected date.
+   */
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);
     setInputValue(formatDate(newDate));
-    console.log('dateChange', newDate);
   };
 
+  /**
+   * Handles the change of the current view in the Datepicker (days, months, years).
+   * 
+   * @param {string} newView - The new view to be displayed.
+   */
   const handleViewChange = (newView) => {
     setView(newView);
-    console.log(newView);
   };
 
+  /**
+   * Closes the calendar view.
+   */
   const handleCloseCalendar = () => {
     setShowCalendar(false);
   };
 
+  /**
+   * Handles the change of the input value in the text field.
+   * 
+   * @param {Event} event - The input change event.
+   */
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
@@ -44,11 +71,19 @@ const Datepicker = ({ date = new Date() }) => {
     }
   };
 
+  /**
+   * useEffect hook to log updates to view and currentDate.
+   */
   useEffect(() => {
     console.log('Updated Index view:', view);
     console.log('Updated Index date:', currentDate);
   }, [view, currentDate]);
 
+  /**
+   * Renders the content based on the current view (days, months, years).
+   * 
+   * @returns {JSX.Element} - The rendered content.
+   */
   const renderContent = () => {
     switch (view) {
       case 'days':
@@ -62,6 +97,9 @@ const Datepicker = ({ date = new Date() }) => {
     }
   };
 
+  /**
+   * Toggles the visibility of the calendar.
+   */
   const toggleCalendar = () => {
     setShowCalendar(!showCalendar);
   };
