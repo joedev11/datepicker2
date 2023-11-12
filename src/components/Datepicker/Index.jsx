@@ -124,7 +124,7 @@ const handleInputChange = (event) => {
           className={`input-date  ${error === '' ? '' : 'error'}`}
         />
         <div className="calendar-icon" onClick={toggleCalendar}>
-          &#128197;
+          &#x1F4C5;
         </div>
       </div>
       {showCalendar && (
