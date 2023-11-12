@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.error {
+    background-color: #FFB9B9;
+}
+
 /* Media query for mobile */
 @media (max-width: 480px) {
     .datepicker-container {

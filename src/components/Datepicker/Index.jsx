@@ -15,6 +15,7 @@ const Datepicker = ({ date = new Date() }) => {
   const [currentDate, setCurrentDate] = useState(date);
   const [inputValue, setInputValue] = useState(formatDate(date));
   const [showCalendar, setShowCalendar] = useState(false);
+  const [error, setError] = useState('');
 
   /**
    * Formats a given date into a string with the format 'YYYY-MM-DD'.
@@ -37,6 +38,7 @@ const Datepicker = ({ date = new Date() }) => {
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);
     setInputValue(formatDate(newDate));
+    setError('');
   };
 
   /**
@@ -55,21 +57,28 @@ const Datepicker = ({ date = new Date() }) => {
     setShowCalendar(false);
   };
 
-  /**
-   * Handles the change of the input value in the text field.
-   * 
-   * @param {Event} event - The input change event.
-   */
-  const handleInputChange = (event) => {
-    const inputValue = event.target.value;
-    setInputValue(inputValue);
-    const newDate = new Date(inputValue);
+/**
+ * Handles the change of the input value in the text field.
+ * 
+ * @param {Event} event - The input change event.
+ */
+const handleInputChange = (event) => {
+  const inputValue = event.target.value;
 
-    // Check if the input value is a valid date before updating state
-    if (!isNaN(newDate.getTime())) {
-      setCurrentDate(newDate);
-    }
-  };
+  // Use a regular expression to check if the input follows the 'YYYY-MM-DD' format
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+  // Check if the input value matches the expected format
+  if (dateRegex.test(inputValue)) {
+    const newDate = new Date(inputValue);
+    setCurrentDate(newDate);
+    setInputValue(inputValue);
+    setError('');
+  } else {
+    setInputValue(inputValue);
+    setError('Invalid date format. Please use the format YYYY-MM-DD.');
+  }
+};
 
   /**
    * useEffect hook to log updates to view and currentDate.
@@ -77,7 +86,7 @@ const Datepicker = ({ date = new Date() }) => {
   useEffect(() => {
     console.log('Updated Index view:', view);
     console.log('Updated Index date:', currentDate);
-  }, [view, currentDate]);
+  }, [view, currentDate, error]);
 
   /**
    * Renders the content based on the current view (days, months, years).
@@ -112,7 +121,7 @@ const Datepicker = ({ date = new Date() }) => {
           value={inputValue}
           onChange={handleInputChange}
           onClick={toggleCalendar}
-          className="input-date"
+          className={`input-date  ${error === '' ? '' : 'error'}`}
         />
         <div className="calendar-icon" onClick={toggleCalendar}>
           &#128197;
