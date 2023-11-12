@@ -21,7 +21,7 @@ const Years = ({ date, onChangeYear, onChangeView }) => {
   const handleYearClick = (year) => {
     const newDate = new Date(year, date.getMonth(), 1);
     onChangeYear(newDate);
-    onChangeView('days');
+    onChangeView('months');
   };
 
   /**
