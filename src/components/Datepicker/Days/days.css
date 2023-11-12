@@ -13,7 +13,7 @@
     height: 25px;
     width: 25px;
     border-radius: 50%;
-    line-height: 22px;
+    line-height: 25px;
 }
 
 .inactive {
@@ -21,11 +21,11 @@
 }
 
 .red {
-    background-color: #F34242;
+    background-color: #db3d44;
     font-weight: 500;
     color: white;
 }
 
 .today {
-    color: #F34242;
+    color: #db3d44;
 }

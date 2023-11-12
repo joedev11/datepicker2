@@ -5,10 +5,20 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
   const [currentDate, setCurrentDate] = useState(date);
   const [currentView, setView] = useState(view);
 
+  useEffect(() => {
+    console.log('Updated Navigation view:', view);
+    console.log('Updated Navigation date:', date);
+    setView(view);
+    setCurrentDate(date);
+  }, [view, date, currentDate]);
+
+
   const formatCurrentDate = () => {
-    let month = currentDate.getMonth();
-    let year = currentDate.getFullYear();
-    let currentMonthAndYear = new Date(year, month, 1).toLocaleDateString('en-US', {
+    console.log('Date from days to Navigation: ' + date)
+    let month = date.getMonth();
+    let year = date.getFullYear();
+    let day = date.getDate();
+    let currentMonthAndYear = new Date(year, month, day).toLocaleDateString('en-US', {
       month: 'long',
       year: 'numeric',
     });
@@ -83,12 +93,6 @@ const Navigation = ({ date, view, onChangeView, onChangeMonth }) => {
         return;
     }
   };
-
-  useEffect(() => {
-    console.log('Updated Navigation view:', view);
-    console.log('Updated Navigation date:', currentDate);
-    setView(view);
-  }, [view, currentDate]);
 
   const handleChangeView = () => {
     if (view === 'days') {

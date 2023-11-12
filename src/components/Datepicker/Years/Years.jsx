@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './years.css';
 
-const Years = ({ date, onChangeYear }) => {
+const Years = ({ date, onChangeYear, onChangeView }) => {
     console.log('YearsDate: ' + date)
   const currentYear = date.getFullYear();
   const startYear = (Math.floor(currentYear / 10) * 10) - 1;
   const endYear = startYear + 11;
 
-  const [selectedYear, setSelectedYear] = useState(currentYear);
-
-  useEffect(() => {
-    setSelectedYear(currentYear);
-  }, [currentYear]);
-
   const handleYearClick = (year) => {
-    onChangeYear(year);
-    setSelectedYear(year);
+    const newDate = new Date(year, date.getMonth(), 1);
+    onChangeYear(newDate);
+    onChangeView('days');
   };
 
   const renderYears = () => {
@@ -26,7 +21,7 @@ const Years = ({ date, onChangeYear }) => {
         <div
           key={year}
           onClick={() => handleYearClick(year)}
-          className={`year ${selectedYear === year ? 'red' : ''} ${isInactive ? 'inactive' : ''}`}
+          className={`year ${currentYear === year ? 'red' : ''} ${isInactive ? 'inactive' : ''}`}
         >
           {year}
         </div>

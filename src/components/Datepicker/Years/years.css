@@ -9,13 +9,15 @@
 }
 
 .year {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
     text-align: center;
-    height: 25px;
+    height: 40px;
     width: 40px;
-    margin: 20px auto;
+    margin: 10px auto;
     justify-content: space-around;
+    border-radius: 50%;
+    line-height: 40px;
 }
 
 .year .red {

@@ -2,13 +2,14 @@ import React from 'react';
 import './days.css';
 
 const Days = ({ date, onChangeDate, onCloseCalendar }) => {
-  console.log('days: ' + date)
+  console.log('Date to Days: ' + date)
 
   const handleDateClick = (day) => {
     const currentYear = date.getFullYear();
     const currentMonth = date.getMonth();
     const newDate = new Date(currentYear, currentMonth, day);
-  
+    
+    console.log('Date from Days: ' + newDate);
     onChangeDate(newDate);
     onCloseCalendar();
   };
